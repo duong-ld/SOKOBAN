@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		E98B95372408B7B000913333 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E98B95362408B7B000913333 /* main.c */; };
+		E98B953F2408B7EF00913333 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E98B953E2408B7EF00913333 /* libSDL2-2.0.0.dylib */; };
+		E98B95412408B80000913333 /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E98B95402408B80000913333 /* libSDL2_image-2.0.0.dylib */; };
+		E98B95492408B9A100913333 /* gameFunc.c in Sources */ = {isa = PBXBuildFile; fileRef = E98B95422408B9A100913333 /* gameFunc.c */; };
+		E98B954A2408B9A100913333 /* editor.c in Sources */ = {isa = PBXBuildFile; fileRef = E98B95442408B9A100913333 /* editor.c */; };
+		E98B954B2408B9A100913333 /* fileFunc.c in Sources */ = {isa = PBXBuildFile; fileRef = E98B95482408B9A100913333 /* fileFunc.c */; };
+		E98B954F2409631900913333 /* stack.c in Sources */ = {isa = PBXBuildFile; fileRef = E98B954E2409631900913333 /* stack.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +31,18 @@
 /* Begin PBXFileReference section */
 		E98B95332408B7B000913333 /* SDL_Sokoban */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_Sokoban; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98B95362408B7B000913333 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		E98B953E2408B7EF00913333 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.10/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
+		E98B95402408B80000913333 /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_image/2.0.5/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
+		E98B95422408B9A100913333 /* gameFunc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gameFunc.c; sourceTree = "<group>"; };
+		E98B95432408B9A100913333 /* editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editor.h; sourceTree = "<group>"; };
+		E98B95442408B9A100913333 /* editor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = editor.c; sourceTree = "<group>"; };
+		E98B95452408B9A100913333 /* constain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constain.h; sourceTree = "<group>"; };
+		E98B95462408B9A100913333 /* gameFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gameFunc.h; sourceTree = "<group>"; };
+		E98B95472408B9A100913333 /* fileFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileFunc.h; sourceTree = "<group>"; };
+		E98B95482408B9A100913333 /* fileFunc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fileFunc.c; sourceTree = "<group>"; };
+		E98B954C2408C1BC00913333 /* source_image */ = {isa = PBXFileReference; lastKnownFileType = folder; name = source_image; path = SDL_Sokoban/source_image; sourceTree = "<group>"; };
+		E98B954D2409631900913333 /* stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack.h; sourceTree = "<group>"; };
+		E98B954E2409631900913333 /* stack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stack.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +50,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E98B95412408B80000913333 /* libSDL2_image-2.0.0.dylib in Frameworks */,
+				E98B953F2408B7EF00913333 /* libSDL2-2.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,8 +61,10 @@
 		E98B952A2408B7B000913333 = {
 			isa = PBXGroup;
 			children = (
+				E98B954C2408C1BC00913333 /* source_image */,
 				E98B95352408B7B000913333 /* SDL_Sokoban */,
 				E98B95342408B7B000913333 /* Products */,
+				E98B953D2408B7EE00913333 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,14 +74,33 @@
 				E98B95332408B7B000913333 /* SDL_Sokoban */,
 			);
 			name = Products;
-			sourceTree = "<group>";
+			path = /Users/luongduong/Desktop/SDL_Sokoban;
+			sourceTree = "<absolute>";
 		};
 		E98B95352408B7B000913333 /* SDL_Sokoban */ = {
 			isa = PBXGroup;
 			children = (
+				E98B954E2409631900913333 /* stack.c */,
+				E98B954D2409631900913333 /* stack.h */,
+				E98B95452408B9A100913333 /* constain.h */,
+				E98B95442408B9A100913333 /* editor.c */,
+				E98B95432408B9A100913333 /* editor.h */,
+				E98B95482408B9A100913333 /* fileFunc.c */,
+				E98B95472408B9A100913333 /* fileFunc.h */,
+				E98B95422408B9A100913333 /* gameFunc.c */,
+				E98B95462408B9A100913333 /* gameFunc.h */,
 				E98B95362408B7B000913333 /* main.c */,
 			);
 			path = SDL_Sokoban;
+			sourceTree = "<group>";
+		};
+		E98B953D2408B7EE00913333 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E98B95402408B80000913333 /* libSDL2_image-2.0.0.dylib */,
+				E98B953E2408B7EF00913333 /* libSDL2-2.0.0.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +160,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E98B954F2409631900913333 /* stack.c in Sources */,
+				E98B95492408B9A100913333 /* gameFunc.c in Sources */,
 				E98B95372408B7B000913333 /* main.c in Sources */,
+				E98B954A2408B9A100913333 /* editor.c in Sources */,
+				E98B954B2408B9A100913333 /* fileFunc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +284,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/sdl2/2.0.10/lib,
+					/usr/local/Cellar/sdl2_image/2.0.5/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -247,6 +298,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/sdl2/2.0.10/lib,
+					/usr/local/Cellar/sdl2_image/2.0.5/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
