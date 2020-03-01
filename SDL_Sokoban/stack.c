@@ -37,3 +37,11 @@ cache pop(node **top) {
 	cache temp = del->action;
 	return temp;
 }
+void freeStack(node *top) {
+    node *del = top;
+    while (top != NULL) {
+        top = top->next;
+        free(del);
+        del = top;
+    }
+}

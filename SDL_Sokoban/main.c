@@ -22,7 +22,7 @@ int main(int argc, const char * argv[]) {
     }
     
     //create window
-    SDL_Window *window = SDL_CreateWindow("SOKOBAN", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, LENGTH, SDL_WINDOW_ALLOW_HIGHDPI);
+    SDL_Window *window = SDL_CreateWindow("DUTY OF SOKOBAN", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, LENGTH, SDL_WINDOW_ALLOW_HIGHDPI);
     if (window == NULL) {
         fprintf(stderr, "Cannot create Window! ERROR: %s", SDL_GetError());
         SDL_Quit();

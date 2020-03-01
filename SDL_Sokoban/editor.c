@@ -5,7 +5,7 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
     //init map
     int map[NB_BLOCK_LENGTH][NB_BLOCK_WIDTH] = {0};
     //init surface
-    SDL_Surface *wall = NULL, *box = NULL, *boxOk = NULL, *obj = NULL, *mario = NULL, *street = NULL;
+    SDL_Surface *wall = NULL, *box = NULL, *boxOk = NULL, *obj = NULL, *mario = NULL, *street = NULL, *emp = NULL;
     int objNow = STREET;
     SDL_Surface *objNowSurface = NULL;
     //load surface
@@ -15,7 +15,8 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
     obj             = IMG_Load("source_image/obj.jpeg");
     mario           = IMG_Load("source_image/mario_down.jpg");
     street          = IMG_Load("source_image/street.jpeg");
-    if (wall == NULL || box == NULL || boxOk == NULL || obj == NULL || mario == NULL || street == NULL) {
+    emp             = IMG_Load("source_image/empty.png");
+    if (wall == NULL || box == NULL || boxOk == NULL || obj == NULL || mario == NULL || street == NULL || emp == NULL) {
         fprintf(stderr, "Cannot init surface! ERROR: %s", SDL_GetError());
         return -1;
     }
@@ -34,23 +35,31 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
                     case SDLK_ESCAPE:
                         continuer = 0;
                         break;
+                    case SDLK_0:
+                        objNow = EMPTY;
+                        objNowSurface = emp;
+                        break;
                     case SDLK_1:
+                        objNow = STREET;
+                        objNowSurface = street;
+                        break;
+                    case SDLK_2:
                         objNow = WALL;
                         objNowSurface = wall;
                         break;
-                    case SDLK_2:
+                    case SDLK_3:
                         objNow = BOX;
                         objNowSurface = box;
                         break;
-                    case SDLK_3:
+                    case SDLK_4:
                         objNow = OBJ;
                         objNowSurface = obj;
                         break;
-                    case SDLK_4:
+                    case SDLK_5:
                         objNow = BOX_OK;
                         objNowSurface = boxOk;
                         break;
-                    case SDLK_5:
+                    case SDLK_6:
                         objNowSurface = mario;
                         objNow = MARIO;
                         break;
@@ -69,7 +78,7 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
                     map[posMouse.y/BLOCK][posMouse.x/BLOCK] = objNow;
                 } else if (event.button.button == SDL_BUTTON_RIGHT) {
                     mouseClick = 2;
-                    map[posMouse.y/BLOCK][posMouse.x/BLOCK] = STREET;
+                    map[posMouse.y/BLOCK][posMouse.x/BLOCK] = EMPTY;
                 }
                 break;
             case SDL_MOUSEBUTTONUP:
@@ -81,7 +90,7 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
                 if (mouseClick == 1) {
                     map[posMouse.y/BLOCK][posMouse.x/BLOCK] = objNow;
                 } else if (mouseClick == 2)
-                    map[posMouse.y/BLOCK][posMouse.x/BLOCK] = STREET;
+                    map[posMouse.y/BLOCK][posMouse.x/BLOCK] = EMPTY;
                 break;
             default:
                 break;
@@ -94,6 +103,9 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
                 position.x = j * BLOCK;
                 position.y = i * BLOCK;
                 switch (map[i][j]) {
+                    case EMPTY:
+                        SDL_BlitSurface(emp, NULL, wdSurface, &position);
+                        break;
                     case STREET:
                         SDL_BlitSurface(street, NULL, wdSurface, &position);
                         break;

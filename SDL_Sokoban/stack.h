@@ -22,6 +22,7 @@ void initStack(node **top);
 int isEmpty(node *top);
 void push(node **top, cache element);
 cache pop(node **top);
+void freeStack(node *top);
 
 
 #endif

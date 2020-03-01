@@ -27,8 +27,14 @@ int loadLevel(int level[][NB_BLOCK_WIDTH]) {
                 case '4':
                     level[i][j] = 4;
                     break;
-                default:
+                case '5':
                     level[i][j] = 5;
+                    break;
+                case '6':
+                    level[i][j] = 6;
+                    break;
+                default:
+                    level[i][j] = 0;
                     break;
             }
         }

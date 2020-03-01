@@ -5,6 +5,7 @@ int join(SDL_Window *window, SDL_Surface *wdSurface) {
     //init surface
     SDL_Surface *mario[4] = {NULL};    //4 state mario
     SDL_Surface *street = NULL, *wall = NULL, *box = NULL, *boxOk = NULL, *obj = NULL, *marioNow = NULL, *win = NULL;
+    SDL_Surface *emp[3] = {NULL}; // 3 state empty
     SDL_Rect posJoin, position;
     //event
     SDL_Event event;
@@ -19,13 +20,16 @@ int join(SDL_Window *window, SDL_Surface *wdSurface) {
     mario[LEFT]     = IMG_Load("source_image/mario_left.jpg");
     mario[RIGHT]    = IMG_Load("source_image/mario_right.jpg");
     marioNow        = mario[DOWN];
+    emp[EMPTY]      = IMG_Load("source_image/empty.png");
+    emp[WALL]       = IMG_Load("source_image/empty_wall.png");
+    emp[STREET]     = IMG_Load("source_image/empty_street.png");
     box             = IMG_Load("source_image/box.jpeg");
     boxOk           = IMG_Load("source_image/box_ok.jpeg");
     wall            = IMG_Load("source_image/wall.jpeg");
     obj             = IMG_Load("source_image/obj.jpeg");
     win             = IMG_Load("source_image/win.jpg");
     street          = IMG_Load("source_image/street.jpeg");
-    if (mario[UP] == NULL || mario[DOWN] == NULL || mario[LEFT] == NULL || mario[RIGHT] == NULL || box == NULL || boxOk == NULL || wall == NULL || obj == NULL || win == NULL || street == NULL) {
+    if (mario[UP] == NULL || mario[DOWN] == NULL || mario[LEFT] == NULL || mario[RIGHT] == NULL || box == NULL || boxOk == NULL || wall == NULL || obj == NULL || win == NULL || street == NULL || emp[WALL] == NULL || emp[EMPTY] == NULL || emp[STREET] == NULL) {
         fprintf(stderr, "Cannot load surface! ERROR: %s", SDL_GetError());
         return -1;
     }
@@ -37,14 +41,12 @@ int join(SDL_Window *window, SDL_Surface *wdSurface) {
     for (int i = 0; i < NB_BLOCK_LENGTH; i++) {
         for (int j = 0; j < NB_BLOCK_WIDTH; j++) {
             if (map[i][j] == MARIO) {
-                posJoin.x = i;
-                posJoin.y = j;
+                posJoin.x = j;
+                posJoin.y = i;
                 map[i][j] = STREET;
             }
         }
     }
-    posJoin.x = 4;
-    posJoin.y = 5;
     //start event
     while(continuer) {
         SDL_WaitEvent(&event);
@@ -57,19 +59,19 @@ int join(SDL_Window *window, SDL_Surface *wdSurface) {
                     case SDLK_ESCAPE:
                         continuer = 0;
                         break;
-                    case SDLK_UP:
+                    case SDLK_UP: case SDLK_w:
                         marioNow = mario[UP];
                         replaceMario(map, &posJoin, UP, &top);
                         break;
-                    case SDLK_DOWN:
+                    case SDLK_DOWN: case SDLK_s:
                         marioNow = mario[DOWN];
                         replaceMario(map, &posJoin, DOWN, &top);
                         break;
-                    case SDLK_LEFT:
+                    case SDLK_LEFT: case SDLK_a:
                         marioNow = mario[LEFT];
                         replaceMario(map, &posJoin, LEFT, &top);
                         break;
-                    case SDLK_RIGHT:
+                    case SDLK_RIGHT: case SDLK_d:
                         marioNow = mario[RIGHT];
                         replaceMario(map, &posJoin, RIGHT, &top);
                         break;
@@ -93,6 +95,14 @@ int join(SDL_Window *window, SDL_Surface *wdSurface) {
                 position.x = j * BLOCK;
                 position.y = i * BLOCK;
                 switch (map[i][j]) {
+                    case EMPTY:
+                        if (i >= 1 && (map[i - 1][j] == STREET || map[i - 1][j] == BOX || map[i - 1][j] == BOX_OK || map[i - 1][j] == OBJ))
+                            SDL_BlitSurface(emp[STREET], NULL, wdSurface, &position);
+                        else if (i >= 1 && map[i - 1][j] == WALL)
+                            SDL_BlitSurface(emp[WALL], NULL, wdSurface, &position);
+                        else
+                            SDL_BlitSurface(emp[EMPTY], NULL, wdSurface, &position);
+                        break;
                     case STREET:
                         SDL_BlitSurface(street, NULL, wdSurface, &position);
                         break;
@@ -147,9 +157,13 @@ int join(SDL_Window *window, SDL_Surface *wdSurface) {
     SDL_FreeSurface(boxOk);
     SDL_FreeSurface(box);
     SDL_FreeSurface(obj);
-    for (int i = 0; i < 3; i ++) {
+    for (int i = 0; i < 4; i ++) {
         SDL_FreeSurface(mario[i]);
     }
+    for (int i = 0; i < 3; i ++) {
+        SDL_FreeSurface(emp[i]);
+    }
+    freeStack(top);
     return 0;
 }
 
@@ -198,26 +212,26 @@ int checkMap(int map[][NB_BLOCK_WIDTH], SDL_Rect *posJoin, int direction) {
     switch (direction) {
         case UP:
             if (posJoin->y - 1 < 0) return 1;
-            if (map[posJoin->y - 1][posJoin->x] == WALL) return 1;
-            if (((map[posJoin->y - 1][posJoin->x] == BOX) || (map[posJoin->y - 1][posJoin->x] == BOX_OK)) && ((map[posJoin->y - 2][posJoin->x] == BOX) || (map[posJoin->y - 2][posJoin->x] == BOX_OK) || (posJoin->y - 2 < 0) || (map[posJoin->y - 2][posJoin->x] == WALL)))
+            if (map[posJoin->y - 1][posJoin->x] == WALL || map[posJoin->y - 1][posJoin->x] == EMPTY) return 1;
+            if (((map[posJoin->y - 1][posJoin->x] == BOX) || (map[posJoin->y - 1][posJoin->x] == BOX_OK)) && ((map[posJoin->y - 2][posJoin->x] == BOX) || (map[posJoin->y - 2][posJoin->x] == BOX_OK) || (posJoin->y - 2 < 0) || (map[posJoin->y - 2][posJoin->x] == WALL) || (map[posJoin->y - 2][posJoin->x] == EMPTY)))
                     return 1;
             break;
         case DOWN:
             if (posJoin->y + 1 == NB_BLOCK_LENGTH) return 1;
-            if (map[posJoin->y + 1][posJoin->x] == WALL) return 1;
-            if (((map[posJoin->y + 1][posJoin->x] == BOX) || (map[posJoin->y + 1][posJoin->x] == BOX_OK)) && ((map[posJoin->y + 2][posJoin->x] == BOX) || (map[posJoin->y + 2][posJoin->x] == BOX_OK) || (posJoin->y + 2 == NB_BLOCK_LENGTH) || (map[posJoin->y + 2][posJoin->x] == WALL)))
+            if (map[posJoin->y + 1][posJoin->x] == WALL || map[posJoin->y + 1][posJoin->x] == EMPTY) return 1;
+            if (((map[posJoin->y + 1][posJoin->x] == BOX) || (map[posJoin->y + 1][posJoin->x] == BOX_OK)) && ((map[posJoin->y + 2][posJoin->x] == BOX) || (map[posJoin->y + 2][posJoin->x] == BOX_OK) || (posJoin->y + 2 == NB_BLOCK_LENGTH) || (map[posJoin->y + 2][posJoin->x] == WALL) || (map[posJoin->y + 2][posJoin->x] == EMPTY)))
                     return 1;
             break;
         case LEFT:
             if (posJoin->x - 1 < 0) return 1;
-            if (map[posJoin->y][posJoin->x - 1] == WALL) return 1;
-            if (((map[posJoin->y][posJoin->x - 1] == BOX) || (map[posJoin->y][posJoin->x - 1] == BOX_OK)) && ((map[posJoin->y][posJoin->x - 2] == BOX) || (map[posJoin->y][posJoin->x - 2] == BOX_OK) || (posJoin->x - 2 < 0) || (map[posJoin->y][posJoin->x - 2] == WALL)))
+            if (map[posJoin->y][posJoin->x - 1] == WALL || map[posJoin->y][posJoin->x - 1] == EMPTY) return 1;
+            if (((map[posJoin->y][posJoin->x - 1] == BOX) || (map[posJoin->y][posJoin->x - 1] == BOX_OK)) && ((map[posJoin->y][posJoin->x - 2] == BOX) || (map[posJoin->y][posJoin->x - 2] == BOX_OK) || (posJoin->x - 2 < 0) || (map[posJoin->y][posJoin->x - 2] == WALL) || (map[posJoin->y][posJoin->x - 2] == EMPTY)))
                     return 1;
             break;
         case RIGHT:
             if (posJoin->x + 1 == NB_BLOCK_WIDTH) return 1;
-            else if (map[posJoin->y][posJoin->x + 1] == WALL) return 1;
-            else if (((map[posJoin->y][posJoin->x + 1] == BOX) || (map[posJoin->y][posJoin->x + 1] == BOX_OK)) && ((map[posJoin->y][posJoin->x + 2] == BOX) || (map[posJoin->y][posJoin->x + 2] == BOX_OK) || (posJoin->x + 2 == NB_BLOCK_WIDTH) || (map[posJoin->y][posJoin->x + 2] == WALL))) return 1;
+            else if (map[posJoin->y][posJoin->x + 1] == WALL || map[posJoin->y][posJoin->x + 1] == EMPTY) return 1;
+            else if (((map[posJoin->y][posJoin->x + 1] == BOX) || (map[posJoin->y][posJoin->x + 1] == BOX_OK)) && ((map[posJoin->y][posJoin->x + 2] == BOX) || (map[posJoin->y][posJoin->x + 2] == BOX_OK) || (posJoin->x + 2 == NB_BLOCK_WIDTH) || (map[posJoin->y][posJoin->x + 2] == WALL) || (map[posJoin->y][posJoin->x + 2] == EMPTY))) return 1;
             break;
             
     }

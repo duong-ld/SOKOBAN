@@ -21,7 +21,7 @@ enum {
     UP, DOWN, LEFT, RIGHT
 };
 enum {
-    STREET, WALL, BOX, OBJ, BOX_OK, MARIO
+    EMPTY, STREET, WALL, BOX, OBJ, BOX_OK, MARIO
 };
 
 
