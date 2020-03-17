@@ -10,5 +10,10 @@
 #define level_h
 
 #include <stdio.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL.h>
+#include "constain.h"
+
+int chooseLevel(SDL_Window *window, SDL_Surface *wdSurface);
 
 #endif /* level_h */

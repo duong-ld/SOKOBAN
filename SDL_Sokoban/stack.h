@@ -9,13 +9,18 @@
 #ifndef _STACK_H
 #define _STACK_H
 
-typedef int cache;
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+    int direc; // UP DOWN LEFT RIGHT
+    int boxMove; // boxMove save data of sokoban move box or not
+} cache;
 typedef struct node
 {
     cache action;
 	struct node *next;
 }node;
-#define empty -1
 
 node *createNode(cache element);
 void initStack(node **top);

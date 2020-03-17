@@ -5,7 +5,7 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
     //init map
     int map[NB_BLOCK_LENGTH][NB_BLOCK_WIDTH] = {0};
     //init surface
-    SDL_Surface *wall = NULL, *box = NULL, *boxOk = NULL, *obj = NULL, *mario = NULL, *street = NULL, *emp = NULL;
+    SDL_Surface *wall = NULL, *box = NULL, *boxOk = NULL, *obj = NULL, *mario = NULL, *street = NULL, *emp = NULL, *save = NULL, *done = NULL, *start = NULL;
     int objNow = STREET;
     SDL_Surface *objNowSurface = NULL;
     //load surface
@@ -16,7 +16,10 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
     mario           = IMG_Load("source_image/mario_down.jpg");
     street          = IMG_Load("source_image/street.jpeg");
     emp             = IMG_Load("source_image/empty.png");
-    if (wall == NULL || box == NULL || boxOk == NULL || obj == NULL || mario == NULL || street == NULL || emp == NULL) {
+    save            = IMG_Load("source_image/save.png");
+    done            = IMG_Load("source_image/done.png");
+    start           = IMG_Load("source_image/start.png");
+    if (wall == NULL || box == NULL || boxOk == NULL || obj == NULL || mario == NULL || street == NULL || emp == NULL || save == NULL || done == NULL || start == NULL) {
         fprintf(stderr, "Cannot init surface! ERROR: %s", SDL_GetError());
         return -1;
     }
@@ -29,10 +32,30 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
         SDL_WaitEvent(&event);
         switch (event.type) {
             case SDL_QUIT:
-                return 1;
+                SDL_FreeSurface(box);
+                SDL_FreeSurface(boxOk);
+                SDL_FreeSurface(wall);
+                SDL_FreeSurface(emp);
+                SDL_FreeSurface(done);
+                SDL_FreeSurface(mario);
+                SDL_FreeSurface(obj);
+                SDL_FreeSurface(street);
+                SDL_FreeSurface(save);
+                SDL_FreeSurface(start);
+                return QUIT;
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
                     case SDLK_ESCAPE:
+                        SDL_FreeSurface(box);
+                        SDL_FreeSurface(boxOk);
+                        SDL_FreeSurface(wall);
+                        SDL_FreeSurface(emp);
+                        SDL_FreeSurface(done);
+                        SDL_FreeSurface(mario);
+                        SDL_FreeSurface(obj);
+                        SDL_FreeSurface(street);
+                        SDL_FreeSurface(save);
+                        SDL_FreeSurface(start);
                         continuer = 0;
                         break;
                     case SDLK_0:
@@ -64,7 +87,13 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
                         objNow = MARIO;
                         break;
                     case SDLK_RETURN:
-                        updateLevel(map);
+                        updateLevel(map, "levelCustom.lvl");
+                        position.x = WIDTH/2 - 300/2;
+                        position.y = LENGTH/2 - 135/2;
+                        SDL_BlitSurface(save, NULL, wdSurface, &position);
+                        SDL_UpdateWindowSurface(window);
+                        SDL_Delay(400);
+                        continuer = 0;
                         break;
                     default:
                         break;
@@ -129,11 +158,46 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
                 }
             }
         }
+        // if continuer == 0 print done
+        //icon size 115*115
+        if (continuer == 0) {
+            position.x = WIDTH/2 - 115/2;
+            position.y = LENGTH/2 - 115/2;
+            SDL_BlitSurface(done, NULL, wdSurface, &position);
+            SDL_UpdateWindowSurface(window);
+            SDL_Delay(300);
+            SDL_BlitSurface(start, NULL, wdSurface, &position);
+            SDL_UpdateWindowSurface(window);
+            continuer = 1;
+            while (continuer) {
+                SDL_WaitEvent(&event);
+                switch (event.type) {
+                    case SDL_MOUSEBUTTONDOWN:
+                        // 115*115 is size of button
+                        if (position.x < event.button.x && event.button.x < position.x + 115
+                            && position.y < event.button.y && event.button.y < position.y + 115)
+                            continuer = 0;
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }
+        }
         position.x = posMouse.x - BLOCK/2;
         position.y = posMouse.y - BLOCK/2;
         SDL_BlitSurface(objNowSurface, NULL, wdSurface, &position);
         SDL_UpdateWindowSurface(window);
     }
+    SDL_FreeSurface(box);
+    SDL_FreeSurface(boxOk);
+    SDL_FreeSurface(wall);
+    SDL_FreeSurface(emp);
+    SDL_FreeSurface(done);
+    SDL_FreeSurface(mario);
+    SDL_FreeSurface(obj);
+    SDL_FreeSurface(street);
+    SDL_FreeSurface(save);
     
     return 0;
 }

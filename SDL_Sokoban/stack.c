@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+
 #include "stack.h"
 
 node *createNode(cache element){
@@ -30,7 +29,10 @@ void push(node **top, cache element) {
 cache pop(node **top) {
 	if (isEmpty(*top)) {
 		fprintf(stderr, "\n (!) No longer take action to undo.\n");
-		return empty;
+        cache empty;
+        empty.direc = -1;
+        empty.boxMove = -1;
+        return empty;
 	}
 	node *del = *top;
 	*top = (*top)->next;

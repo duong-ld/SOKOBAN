@@ -16,10 +16,10 @@
 #include "stack.h"
 #include "fileFunc.h"
 
-int join(SDL_Window *window, SDL_Surface *wdSurface);
+int join(SDL_Window *window, SDL_Surface *wdSurface, int level, char fileName[81]);
 void replaceMario(int map[][NB_BLOCK_WIDTH], SDL_Rect *posJoin, int direction, node **top);
 int checkMap(int map[][NB_BLOCK_WIDTH], SDL_Rect *posJoin, int direction);
-void replaceBox(int *premierCase, int *secondCase);
+void replaceBox(int *premierCase, int *secondCase, cache *direc);
 void undoAction(int map[][NB_BLOCK_WIDTH], node **top, SDL_Rect *posJoin);
 
 #endif

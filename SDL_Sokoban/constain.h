@@ -17,6 +17,9 @@
 #define WIDTH               BLOCK * NB_BLOCK_WIDTH
 #define LENGTH              BLOCK * NB_BLOCK_LENGTH
 
+#define MAX_LEVEL           10
+#define QUIT                -99999999
+
 enum {
     UP, DOWN, LEFT, RIGHT
 };

@@ -10,5 +10,10 @@
 #define help_h
 
 #include <stdio.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include "constain.h"
+
+int help(SDL_Window *window, SDL_Surface *wdSurface);
 
 #endif /* help_h */

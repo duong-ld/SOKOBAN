@@ -14,8 +14,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int loadLevel(int level[][NB_BLOCK_WIDTH]);
-int updateLevel(int level[][NB_BLOCK_WIDTH]);
+int loadLevel(int level[][NB_BLOCK_WIDTH], int mapNum, char fileName[81]);
+int updateLevel(int level[][NB_BLOCK_WIDTH], char fileName[81]);
 
 #endif
 
