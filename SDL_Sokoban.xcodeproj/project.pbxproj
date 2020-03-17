@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E947FE832411D40E006751C0 /* help.c in Sources */ = {isa = PBXBuildFile; fileRef = E947FE822411D40E006751C0 /* help.c */; };
+		E978D9A82413ECBA00D8F313 /* level.c in Sources */ = {isa = PBXBuildFile; fileRef = E978D9A72413ECBA00D8F313 /* level.c */; };
 		E98B95372408B7B000913333 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E98B95362408B7B000913333 /* main.c */; };
 		E98B953F2408B7EF00913333 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E98B953E2408B7EF00913333 /* libSDL2-2.0.0.dylib */; };
 		E98B95412408B80000913333 /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E98B95402408B80000913333 /* libSDL2_image-2.0.0.dylib */; };
@@ -29,7 +31,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E98B95332408B7B000913333 /* SDL_Sokoban */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_Sokoban; sourceTree = BUILT_PRODUCTS_DIR; };
+		E947FE812411D40E006751C0 /* help.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = help.h; sourceTree = "<group>"; };
+		E947FE822411D40E006751C0 /* help.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = help.c; sourceTree = "<group>"; };
+		E978D9A62413ECBA00D8F313 /* level.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = level.h; sourceTree = "<group>"; };
+		E978D9A72413ECBA00D8F313 /* level.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = level.c; sourceTree = "<group>"; };
+		E98B95332408B7B000913333 /* SDL_Sokoban */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = SDL_Sokoban; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98B95362408B7B000913333 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E98B953E2408B7EF00913333 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.10/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		E98B95402408B80000913333 /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_image/2.0.5/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
@@ -90,6 +96,10 @@
 				E98B95422408B9A100913333 /* gameFunc.c */,
 				E98B95462408B9A100913333 /* gameFunc.h */,
 				E98B95362408B7B000913333 /* main.c */,
+				E947FE812411D40E006751C0 /* help.h */,
+				E947FE822411D40E006751C0 /* help.c */,
+				E978D9A62413ECBA00D8F313 /* level.h */,
+				E978D9A72413ECBA00D8F313 /* level.c */,
 			);
 			path = SDL_Sokoban;
 			sourceTree = "<group>";
@@ -160,6 +170,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E947FE832411D40E006751C0 /* help.c in Sources */,
+				E978D9A82413ECBA00D8F313 /* level.c in Sources */,
 				E98B954F2409631900913333 /* stack.c in Sources */,
 				E98B95492408B9A100913333 /* gameFunc.c in Sources */,
 				E98B95372408B7B000913333 /* main.c in Sources */,
