@@ -151,10 +151,9 @@ int join(SDL_Window *window, SDL_Surface *wdSurface, int level, char fileName[81
         //Load win surface
         if (!objRemain) {
             while (1) {
-                SDL_Delay(300);
-                //350 * 350 is size of win image
-                position.x = WIDTH / 2 - 350 / 2;
-                position.y = LENGTH / 2 - 350 / 2;
+                //400 * 400 is size of win image
+                position.x = WIDTH / 2 - 400 / 2;
+                position.y = LENGTH / 2 - 400 / 2;
                 SDL_BlitSurface(win, NULL, wdSurface, &position);
                 //Update surfect
                 SDL_UpdateWindowSurface(window);
