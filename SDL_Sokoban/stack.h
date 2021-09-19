@@ -12,10 +12,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 typedef struct {
     int direc; // UP DOWN LEFT RIGHT
-    int boxMove; // boxMove save data of sokoban move box or not
+    int boxMove; // boolean: move box or not
 } cache;
+
 typedef struct node
 {
     cache action;
@@ -28,6 +30,7 @@ int isEmpty(node *top);
 void push(node **top, cache element);
 cache pop(node **top);
 void freeStack(node *top);
+
 
 
 #endif

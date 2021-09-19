@@ -87,12 +87,12 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
                         objNow = MARIO;
                         break;
                     case SDLK_RETURN:
-                        updateLevel(map, "levelCustom.lvl");
+                        updateLevel(map, "source_level/levelCustom.lvl");
                         position.x = WIDTH/2 - 300/2;
                         position.y = LENGTH/2 - 135/2;
                         SDL_BlitSurface(save, NULL, wdSurface, &position);
                         SDL_UpdateWindowSurface(window);
-                        SDL_Delay(400);
+                        SDL_Delay(200);
                         continuer = 0;
                         break;
                     default:
@@ -159,7 +159,7 @@ int editMap(SDL_Window *window, SDL_Surface *wdSurface) {
             }
         }
         // if continuer == 0 print done
-        //icon size 115*115
+        // icon size 115*115
         if (continuer == 0) {
             position.x = WIDTH/2 - 115/2;
             position.y = LENGTH/2 - 115/2;
